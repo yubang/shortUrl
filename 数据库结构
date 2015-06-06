@@ -1,0 +1,8 @@
+create table if not exists shortUrl_urls(
+    id int(11) auto_increment,
+    token varchar(32) not null,
+    url text not null,
+    createTime timestamp,
+    primary key(id),
+    unique(token)
+);

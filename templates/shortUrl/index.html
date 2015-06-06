@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>短网址生成器</title>
+        <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">短网址生成小工具</div>
+            <div class="panel-body">
+                
+                <input type="text" id="url" class="form-control">
+                <br>
+                <p align="center">
+                    <a href="javascript:buildUrl();" class="btn btn-info">生成短网址</a>
+                </p>
+                <hr>
+                <p>
+                    生成的短网址：<font style="color:skyblue;font-size:20px;" id="m"></font>
+                </p>
+            </div>
+        </div>
+        
+        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script>
+            function buildUrl(){
+                
+                var url = $("#url").val();
+                
+                if(url==""){
+                    return;
+                }
+                
+                $("#m").html("正在生成短网址！");
+                
+                $.ajax({
+                    url:"buildUrl",
+                    type:"POST",
+                    data:{"url":url},
+                    success:function(data){
+                        $("#m").html(data['key']);
+                    },
+                    error:function(e1,e2,e3){
+                        $("#m").html("服务器出错了，请稍后再尝试！");
+                    }
+                });
+                
+            }
+        </script>
+    </body>
+</html>
